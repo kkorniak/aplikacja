@@ -19,8 +19,10 @@
         <td><%= worker.email %></td>
         <td><%= worker.address %></td>
         <td><%= link_to 'Show', worker %></td>
+        <% if user_signed_in? %>
         <td><%= link_to 'Edit', edit_worker_path(worker) %></td>
         <td><%= link_to 'Destroy', worker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         <% end %>
       </tr>
     <% end %>
   </tbody>

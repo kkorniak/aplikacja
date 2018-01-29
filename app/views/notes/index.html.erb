@@ -1,3 +1,14 @@
+<%= link_to "Home", root_path %>
+<%= link_to "About", about_path %>
+<%= link_to "Workers", workers_path %>
+<%= link_to "Notatki", notes_path %>
+<% if user_signed_in? %>
+<%= link_to "Wyloguj się", destroy_user_session_path, method: :delete  %>
+<% else %>
+<%= link_to "Zaloguj się", new_user_session_path %>
+<%= link_to "Zarejestruj się", new_user_registration_path %>
+<% end %>
+
 <h1>Listing notes</h1>
 
 <table>

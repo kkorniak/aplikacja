@@ -1,22 +1,46 @@
-<%= link_to "Home", root_path %>
-<%= link_to "About", about_path %>
-<%= link_to "Workers", workers_path %>
-<%= link_to "Notatki", notes_path %>
-<% if user_signed_in? %>
-<%= link_to "Wyloguj się", destroy_user_session_path, method: :delete  %>
-<% else %>
-<%= link_to "Zaloguj się", new_user_session_path %>
-<%= link_to "Zarejestruj się", new_user_registration_path %>
-<% end %>
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
 
-<h1>Listing notes</h1>
+
+<nav class="navbar navbar-light" style="background-color: #b3b3e6;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Zarządzanie pracownikami</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="<%= root_path %>">Strona główna</a></li>
+      <li><a href="<%= about_path %>">O twórcy</a></li>
+      <li><a href="<%= workers_path %>">Pracownicy</a></li>
+      <li><a href="<%= notes_path %>">Notatki</a></li>
+    </ul>
+
+  
+  <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+    <li><%= link_to current_user.email, edit_user_registration_path %></li>
+            <li><%= link_to "Wyloguj się", destroy_user_session_path, method: :delete %></li>
+            <% else %>
+            <li ><a href="<%= new_user_registration_path %>">Zarejestruj się</a></li>
+            <li ><a href="<%= new_user_session_path %>">Zaloguj się</a></li>
+            <% end %>
+          </ul>
+   </div>
+</nav>  
+
+<h1>Notatki</h1>
 
 <table>
   <thead>
+    <table class="table table-dark">
     <tr>
-      <th>Worker</th>
-      <th>Meeting hour</th>
-      <th>Note text</th>
+      <th>Pracownik</th>
+      <th>Godzina</th>
+      <th>Notatka</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,19 +48,26 @@
   <tbody>
     <% @notes.each do |note| %>
       <tr>
+        
         <td><%= note.worker_id %></td>
         <td><%= note.meeting_hour %></td>
         <td><%= note.note_text %></td>
-        <td><%= link_to 'Show', note %></td>
+        <td><%= link_to('Pokaż', note, :class => 'btn btn-sm btn-primary')  %></td> 
         <% if user_signed_in? %>
-        <td><%= link_to 'Edit', edit_note_path(note) %></td>
-        <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
+        <td><%= link_to('Edytuj', edit_note_path(note), :class => 'btn btn-sm btn-primary')  %></td> 
+        <td><%= link_to('Usuń', note, method: :delete, :class => 'btn btn-sm btn-primary', data: { confirm: 'Are you sure?' }) %></td>
+         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+<%= link_to('Nowa notatka', new_note_path, :class => 'btn btn-primary btn-md' )  %>
 
-<%= link_to 'New Note', new_note_path %>
+</head>
+
+  <body class="container" style="background-color:	#cccccc">
+<%= yield %>
+
+</body>

@@ -65,6 +65,9 @@ class NotesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_note
       @note = Note.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = ""
+      redirect_to :action => 'index'
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

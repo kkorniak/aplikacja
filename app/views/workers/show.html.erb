@@ -1,3 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+
+<nav class="navbar navbar-light" style="background-color: #b3b3e6;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Zarządzanie pracownikami</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="<%= root_path %>">Strona główna</a></li>
+      <li><a href="<%= about_path %>">O twórcy</a></li>
+      <li><a href="<%= workers_path %>">Pracownicy</a></li>
+      <li><a href="<%= notes_path %>">Notatki</a></li>
+    </ul>
+
+  
+  <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+    <li><%= link_to current_user.email, edit_user_registration_path %></li>
+            <li><%= link_to "Wyloguj się", destroy_user_session_path, method: :delete %></li>
+            <% else %>
+            <li ><a href="<%= new_user_registration_path %>">Zarejestruj się</a></li>
+            <li ><a href="<%= new_user_session_path %>">Zaloguj się</a></li>
+            <% end %>
+          </ul>
+   </div>
+</nav>  
+
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -19,6 +54,17 @@
   <strong>Address:</strong>
   <%= @worker.address %>
 </p>
+  
+    
+<%= link_to('Edytuj', edit_worker_path(@worker), :class => 'btn btn-primary btn-md') %>
+<%= link_to('Cofnij się', workers_path, :class => 'btn btn-primary btn-md') %>
 
-<%= link_to 'Edit', edit_worker_path(@worker) %> |
-<%= link_to 'Back', workers_path %>
+  </head>
+
+  <body class="container" style="background-color:	#cccccc">
+  <%= yield %>
+    
+    </html>
+
+</body>
+

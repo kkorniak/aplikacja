@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+
+
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %> 
+<%= csrf_meta_tags %>
 
 
 <nav class="navbar navbar-light" style="background-color: #b3b3e6;">
@@ -32,42 +33,45 @@
    </div>
 </nav>  
 
-<h1>Notatki</h1>
+<h2>Zarejestruj się</h2>
 
-<table>
-  <thead>
-    <table class="table table-dark">
-    <tr>
-      <th>Pracownik</th>
-      <th>Godzina</th>
-      <th>Notatka</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
 
-  <tbody>
-    <% @notes.each do |note| %>
-      <tr>
-        
-        <td><%= note.worker_id %></td>
-        <td><%= note.meeting_hour %></td>
-        <td><%= note.note_text %></td>
-        <td><%= link_to('Pokaż', note, :class => 'btn btn-sm btn-primary')  %></td> 
-        <% if user_signed_in? %>
-        <td><%= link_to('Edytuj', edit_note_path(note), :class => 'btn btn-sm btn-primary')  %></td> 
-        <td><%= link_to('Usuń', note, method: :delete, :class => 'btn btn-sm btn-primary', data: { confirm: 'Are you sure?' }) %></td>
-         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
 
-<br>
-<%= link_to('Nowa notatka', new_note_path, :class => 'btn btn-primary btn-md' )  %>
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
 
-</head>
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+  
+  
+  </head>
 
   <body class="container" style="background-color:	#cccccc">
-<%= yield %>
+  <%= yield %>
+    
+    
 
 </body>
+
+ </html>
+ 

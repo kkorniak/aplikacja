@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+
+<nav class="navbar navbar-light" style="background-color: #b3b3e6;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Zarządzanie pracownikami</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="<%= root_path %>">Strona główna</a></li>
+      <li><a href="<%= about_path %>">O twórcy</a></li>
+      <li><a href="<%= workers_path %>">Pracownicy</a></li>
+      <li><a href="<%= notes_path %>">Notatki</a></li>
+    </ul>
+
+  
+  <ul class="nav navbar-nav navbar-right" style="background-color: #9999ff;">
+      <% if user_signed_in? %>
+    <li><%= link_to current_user.email, edit_user_registration_path %></li>
+            <li><%= link_to "Wyloguj się", destroy_user_session_path, method: :delete %></li>
+            <% else %>
+            <li ><a href="<%= new_user_registration_path %>">Zarejestruj się</a></li>
+            <li ><a href="<%= new_user_session_path %>">Zaloguj się</a></li>
+            <% end %>
+          </ul>
+   </div>
+</nav>  
+
+<h2>Edytuj <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password %> <i>(Zostaw puste pole jesli nie chcesz zmieniac)</i><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> - minimalna liczba znaków</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password %> <i>(Wprowadz swoje haslo jeszcze raz)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Zaktualizuj" %>
+  </div>
+<% end %>
+
+<h3>Usuń moje konto</h3>
+
+  <td><%= link_to('Usuń konto', registration_path(resource_name), method: :delete, :class => 'btn btn-primary btn-md', data: { confirm: 'Are you sure?' }) %></td>
+
+<%= link_to('Cofnij się', :back, :class => 'btn btn-primary btn-md') %>
+  
+   <body class="container" style="background-color:	#cccccc">
+<%= yield %>
+  </body>
+    
+    </html>

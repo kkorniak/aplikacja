@@ -5,7 +5,7 @@ class CreateWorkers < ActiveRecord::Migration
       t.string :surname
       t.string :email
       t.string :address
-
+      t.references(:notes)
       t.timestamps
     end
   end

@@ -19,7 +19,7 @@
     </ul>
 
   
-  <ul class="nav navbar-nav navbar-right">
+  <ul class="nav navbar-nav navbar-right" style="background-color: #9999ff;">
       <% if user_signed_in? %>
     <li><%= link_to current_user.email, edit_user_registration_path %></li>
             <li><%= link_to "Wyloguj się", destroy_user_session_path, method: :delete %></li>
@@ -32,8 +32,10 @@
 </nav>  
 
 
-<h1>About</h1>
-
+<h1>Twórca aplikacji</h1>
+<p>
+  Kacper Korniak, III rok Informatyka, studia stacjonarne
+  </p>
   <body class="container" style="background-color:	#cccccc">
 <%= yield %>
 

@@ -20,7 +20,7 @@
     </ul>
 
   
-  <ul class="nav navbar-nav navbar-right">
+  <ul class="nav navbar-nav navbar-right" style="background-color: #9999ff;">
       <% if user_signed_in? %>
     <li><%= link_to current_user.email, edit_user_registration_path %></li>
             <li><%= link_to "Wyloguj się", destroy_user_session_path, method: :delete %></li>
@@ -66,6 +66,7 @@
     <% end %>
   </tbody>
 </table>
+ 
 <br>
 <%= link_to('Dodaj nowego pracownika', new_worker_path, :class => 'btn btn-primary btn-md' )  %>
 

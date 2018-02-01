@@ -21,7 +21,7 @@
     </ul>
 
   
-  <ul class="nav navbar-nav navbar-right">
+  <ul class="nav navbar-nav navbar-right" style="background-color: #9999ff;">
       <% if user_signed_in? %>
     <li><%= link_to current_user.email, edit_user_registration_path %></li>
             <li><%= link_to "Wyloguj się", destroy_user_session_path, method: :delete %></li>
@@ -35,14 +35,72 @@
 
 
 
-
-
-<h1>Home</h1>
-  
-  
 </head>
+  
+  <style>
+  .color1{
+  background-color: #b3c6ff;
+  padding: 0 10px;
+}
+      .color2{
+  background-color: #99b3ff;
+  padding: 0 10px;
+}
+    
+        .color3{
+  background-color: #809fff;
+  padding: 0 10px;
+}
+          
+
+  </style>
+  
   <body class="container" style="background-color:	#cccccc">
 <%= yield %>
+    <div class="container">
+     
+        
+            <div class="row ">
+                <div class="col-6 col-md-4 black text-center">
+                   <div class="color1">
+                     <h3 align="center">
+                       O aplikacji
+                     </h1>
+                     <br>
+                    <p align="left">Aplikacja przeznaczona do zarządzania pracownikami firmy.</p>
+                </div>
+              </div>
+                <div class="col-6 col-md-4">
+                  <div class="color2">
+                    <h3 align="center">
+                      Zakres funkcjonalnosci
+                    </h2>
+                    <br>
+                    <p>Z poziomu aplikacji możemy:</p>
+                      <ul>
+                        <li>dodawać nowych pracowników</li>
+                        <li>edytować dane poszczególnej osobie</li>
+                        <li>usuwać z listy pracowników</li>
+                        <li>uzyskać wgląd do informacji o pracowniku</li>
+                        <li>tworzyć notatki i przypisać je konkretnej osobie podając jej ID</li>
+                    </ul>
+                   
+                </div>
+              </div>
+              <div class="col-6 col-md-4 ">
+                <div class="color3">
+                  <h3 align="center">
+                    Dostęp kontrolowany
+                  </h2>
+                  <br>
+                    <p>Aby uzyskać dostęp do wszystkich funkcji należy się zarejestrować. Osoba zalogowana może edytować, usuwać, dodawać nowe dane. 
+                      W przypadku osoby niezalogowanej/niezarejestrowanej możliwy jest wgląd do samej listy oraz do poszczególnej osoby. Swoje konto możemy edytować np. zmieniać hasło.</p>
+                </div>
+            </div>
+        </div>
+    
+
+  
 
 </body>
 

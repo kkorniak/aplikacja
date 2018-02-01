@@ -4,8 +4,9 @@ class CreateNotes < ActiveRecord::Migration
       t.integer :worker_id
       t.string :meeting_hour
       t.string :note_text
-
+      t.references(:worker)
       t.timestamps
     end
+    add_index :notes[:worker_id, :name]
   end
 end
